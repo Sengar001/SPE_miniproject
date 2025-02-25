@@ -1,9 +1,14 @@
 ---
 - name: Deploy Calculator Docker Image
   hosts: localhost
-  remote_user: abhishek-singh-sengar
+#  remote_user: abhishek-singh-sengar
   become: false
   tasks:
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+
     - name: Pull Docker Image
       docker_image:
         name: "sengar001/calculator:latest"
@@ -14,11 +19,6 @@
       debug:
         var: docker_pull_result
 
-    - name: Ensure Docker service is running
-      service:
-        name: docker
-        state: started
-
     - name: Stop and Remove Existing Container (if it exists)
       shell: |
         docker stop calculator || true
@@ -26,4 +26,4 @@
       ignore_errors: yes
 
     - name: Run Docker container
-      shell: docker run -it -d --name calculator calculator
+      shell: docker run -it -d --name calculator --restart unless-stopped sengar001/calculator:latest
