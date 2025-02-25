@@ -1,12 +1,12 @@
 ---
 - name: Deploy Calculator Docker Image
   hosts: localhost
-  remote_user: abhishek
+  remote_user: abhishek-singh-sengar
   become: false
   tasks:
     - name: Pull Docker Image
       docker_image:
-        name: "calculator"
+        name: "sengar001/calculator:latest"
         source: pull
       register: docker_pull_result
 
