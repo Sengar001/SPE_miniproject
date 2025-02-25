@@ -12,11 +12,11 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Checkout the code from the GitHub repository
                     git branch: 'master', url: "${GITHUB_REPO_URL}"
                 }
             }
         }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -32,14 +32,16 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-             steps {
-                 sh 'docker build -t $DOCKER_IMAGE .'
-                 }
+            steps {
+                script {
+                    sh 'docker build -t $DOCKER_IMAGE .'
+                }
+            }
         }
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'sengar001', passwordVariable: 'Sengar@001')]) {
+                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
                         def loginStatus = sh(script: 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin', returnStatus: true)
                         if (loginStatus != 0) {
@@ -54,7 +56,6 @@ pipeline {
                 }
             }
         }
-
 
         stage('Run Ansible Playbook') {
             steps {
