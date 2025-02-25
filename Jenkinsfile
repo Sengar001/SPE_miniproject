@@ -39,7 +39,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'Sengar001', passwordVariable: 'Sengar@001')]) {
+                withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'sengar001', passwordVariable: 'Sengar@001')]) {
                     script {
                         def loginStatus = sh(script: 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin', returnStatus: true)
                         if (loginStatus != 0) {
