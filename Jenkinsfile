@@ -20,7 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean package'
-                sh 'ls -lh target'
+//                 sh 'ls -lh target'
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE -f Dockerfile .'
+                    sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
