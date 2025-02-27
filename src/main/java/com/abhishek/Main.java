@@ -1,4 +1,4 @@
-package abhishek;
+package com.abhishek;
 import java.util.Scanner;
 public class Main {
     public static double squareRoot(double x) {

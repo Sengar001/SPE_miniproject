@@ -1,6 +1,5 @@
-import abhishek.Main;
+package com.abhishek;
 
-import static  org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 public class JunitTest {
