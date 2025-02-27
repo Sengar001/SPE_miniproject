@@ -14,10 +14,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built jar from the build stage. Adjust jar name as per your artifact.
-COPY --from=build /app/target/Calculator-1.0-SNAPSHOT.jar app.jar
+COPY /target/Calculator-1.0-SNAPSHOT.jar app.jar
 
 # Expose a port if necessary (example: 8080). Remove if not needed.
 EXPOSE 8080
 
 # Run the application.
-CMD ["java", "-jar", "app.jar", "com.abhishek.Main"]
+CMD ["java", "-jar", "app.jar"]
