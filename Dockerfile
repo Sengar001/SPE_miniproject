@@ -20,4 +20,4 @@ COPY --from=build /app/target/Calculator-1.0-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Run the application.
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar", "com.abhishek.Main"]
